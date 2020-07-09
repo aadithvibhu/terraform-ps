@@ -1,0 +1,10 @@
+export no_proxy=169.254.169.254,localhost,127.0.0.1
+export ENVNAME="sit"
+export PROJECT="cts"
+export TF_HOME="/apps"
+export TF_LANDSCAPE_ENABLED="false"
+export PATH=/apps:$PATH
+export WORKSPACE=/apps
+export APPNAME="supermarket"
+export S3_BUCKET="ais3"
+export KEYNAME="kp_devops"
