@@ -1,3 +1,6 @@
+resource "aws_network_interface" "main" {
+  subnet_id       = "${var.subnet_id}"
+}
 resource "aws_instance" "linux_instance" {
   count 	          = "${var.instance_count}"
   ami                     = "${lookup(var.linux_ami, var.aws_region)}"
@@ -7,6 +10,7 @@ resource "aws_instance" "linux_instance" {
   user_data    	 	  = "${var.user_data}"
   iam_instance_profile    = "${var.iam_instance_profile}"
   key_name                = "${var.key_name}"
+  subnet_id               = "${var.subnet_id}"
   
 
   root_block_device {
@@ -31,43 +35,6 @@ resource "aws_key_pair" "kp_devops" {
 }
 
 
-resource "aws_security_group" "public_sg" {
-  name        = "public_sg"
-  description = "Allow inbound traffic"
-  vpc_id      = "${var.vpc_id}"
-  tags = {
-    Name                     = "public_sg"
-    Type                     = "EC2 Security Group"
-    Monitoring               = "true"
-  }
-}
-
-resource "aws_security_group" "private_sg" {
-  name        = "private_sg"
-  description = "Allow inbound traffic"
-  vpc_id      = "${var.vpc_id}"
-  tags = {
-    Name                     = "private_sg"
-    Type                     = "EC2 Security Group"
-    Monitoring               = "true"
-  }
-}
-
-resource "aws_security_group" "data_sg" {
-  name        = "data_sg"
-  description = "Allow inbound traffic"
-  vpc_id      = "${var.vpc_id}"
-  tags = {
-    Name                     = "data_sg"
-    Type                     = "database Security Group"
-    Monitoring               = "true"
-  }
-}
-
-
-
-
-
 ###################################
 #variables
 #*********
@@ -81,11 +48,13 @@ variable "linux_ami" {
 variable aws_region {
       default = "ap-southeast-1"
 }
+
 variable vpc_id {}
 variable instance_count {}
 variable instance_type {}
 variable instance_name {}
 variable subnet_id {}
+variable sg_id {}
 variable subnet_type {}
 variable volume_size {}
 variable user_data {}
@@ -101,16 +70,3 @@ variable project {}
 
 
 ##########################################
-#outputs
-
-output pub_sg {
-   value = "${aws_security_group.public_sg}"
-}
-
-output priv_sg {
-   value = "${aws_security_group.private_sg}"
-}
-output data_sg {
-   value = "${aws_security_group.data_sg}"
-}
-

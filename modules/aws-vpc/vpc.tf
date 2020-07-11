@@ -24,13 +24,10 @@ resource "aws_subnet" "sub_private_devops" {
 }
 
 
-
 ##################################
 variable vpc_cidr {}
 variable sub_private_cidr {}
 variable project {}
-
-
 
 
 
