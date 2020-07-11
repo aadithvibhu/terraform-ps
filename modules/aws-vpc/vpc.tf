@@ -1,4 +1,5 @@
-# Internet VPC
+# Internal VPC
+#***************
 resource "aws_vpc" "main" {
     cidr_block = "${var.vpc_cidr}"
     instance_tenancy = "default"
@@ -7,39 +8,18 @@ resource "aws_vpc" "main" {
     enable_classiclink = "false"
     tags = {
         Name = "${var.project}-vpc"
+        Environment = "${var.environment}"
     }
 }
 
-
-# Subnets
-#********
-
-resource "aws_subnet" "sub_private_devops" {
-    vpc_id = "${aws_vpc.main.id}"
-    cidr_block = "${var.sub_private_cidr}"
-
-    tags = {
-        Name = "sub_private_devops"
-    }
-}
+#********* Variables **********
+#variable vpc_cidr {}
+#variable project {}
+#variable environment {}
 
 
-
-##################################
-variable vpc_cidr {}
-variable sub_private_cidr {}
-variable project {}
-
-
-
-
-
-##################################
+#********** Outputs ************
 
 output "vpc_id" {
      value   = aws_vpc.main.id
-}
-
-output "private_subnet" {
-  value       = aws_subnet.sub_private_devops.id
 }
