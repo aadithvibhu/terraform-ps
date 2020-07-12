@@ -8,7 +8,7 @@ module "webserver" {
     vpc_id                  = "${data.aws_vpc.main.id}"
     environment             = "${var.environment}"
     project                 = "${var.project}"
-    subnet_type             = "public"
-    subnet_id               = "${data.aws_subnet.public_subnet.id}"
+    subnet_type             = "private"
+    subnet_id               = "${data.aws_subnet.private_subnet.id}"
     sg_id                   = "${data.aws_security_groups.web_sg.id}"
 }

@@ -1,9 +1,12 @@
-module enable_prod_vpc {
-   source           = "../../../modules/main-vpc"
-   vpc_cidr         = "10.0.0.0/16"
-   sub_public_cidr  = "10.0.1.0/27"
-   sub_private_cidr = "10.0.2.0/27"
-   sub_data_cidr    = "10.0.3.0/27"
-   project          = "enable"
-   environment      = "Production"
+provider aws {
+   region = "${var.region}"
+}
+module prod_vpc {
+   source           = "../../../../../modules/aws-vpc"
+   vpc_cidr         = "${var.vpc_cidr}"
+   sub_public_cidr  = "${var.sub_public_cidr}"
+   sub_private_cidr = "${var.sub_private_cidr}"
+   sub_data_cidr    = "${var.sub_data_cidr}"
+   project          = "${var.project}"
+   environment      = "${var.environment}"
 }
