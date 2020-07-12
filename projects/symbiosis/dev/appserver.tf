@@ -1,9 +1,9 @@
 module "appserver" {
-    source = "../modules/aws-ec2"
+    source = "../../modules/aws-ec2"
     instance_count          = 1
     instance_type           = "t2.micro"
     instance_name           = "appserver"
-    user_data               = file("../scripts/apache.sh")
+    user_data               = file("../../scripts/symbiosis.sh")
     volume_size             = 8
     vpc_id                  = "${data.aws_vpc.main.id}"
     environment             = "${var.environment}"
