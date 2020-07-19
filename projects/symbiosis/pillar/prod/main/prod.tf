@@ -4,9 +4,13 @@ provider aws {
 module prod_vpc {
    source           = "../../../../../modules/aws-vpc"
    vpc_cidr         = "${var.vpc_cidr}"
-   sub_public_cidr  = "${var.sub_public_cidr}"
-   sub_private_cidr = "${var.sub_private_cidr}"
-   sub_data_cidr    = "${var.sub_data_cidr}"
-   project          = "${var.project}"
-   environment      = "${var.environment}"
+   sub_public_cidr_1  = "${var.sub_public_cidr_1}"
+   sub_public_cidr_2  = "${var.sub_public_cidr_2}"
+   sub_private_cidr_1 = "${var.sub_private_cidr_1}"
+   sub_private_cidr_2 = "${var.sub_private_cidr_2}"
+   sub_data_cidr_1    = "${var.sub_data_cidr_1}"
+   sub_data_cidr_2    = "${var.sub_data_cidr_2}"
+   project            = "${var.project}"
+   environment        = "${var.environment}"
+   avz                = "${var.avz}"
 }

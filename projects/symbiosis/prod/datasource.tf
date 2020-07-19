@@ -14,34 +14,55 @@ data "aws_subnet_ids" "app_tier" {
   vpc_id = "${data.aws_vpc.main.id}"
 }
 
-data "aws_subnet" "private_subnet" {
+data "aws_subnet" "private_subnet_1" {
    filter {
     name = "tag:Name"
-    values = ["sub-private-${var.project}"]
+    values = ["sub_private_${var.project}_1"]
   }
 }
-data "aws_security_groups" "app_sg" {
-  filter {
+data "aws_subnet" "private_subnet_2" {
+   filter {
     name = "tag:Name"
-    values = ["${var.project}_private_sg"]
-        }
+    values = ["sub_private_${var.project}_2"]
+  }
 }
+
+
 
 ######## Public Network ##########
 data "aws_subnet_ids" "web_tier" {
   vpc_id = "${data.aws_vpc.main.id}"
 }
 
-data "aws_subnet" "public_subnet" {
+data "aws_subnet" "public_subnet_1" {
    filter {
     name = "tag:Name"
-    values = ["sub-public-${var.project}"]
+    values = ["sub_public_${var.project}_1"]
   }
 }
 
-data "aws_security_groups" "web_sg" {
-  filter {
+data "aws_subnet" "public_subnet_2" {
+   filter {
     name = "tag:Name"
-    values = ["${var.project}_public_sg"]
-        }
+    values = ["sub_public_${var.project}_2"]
+  }
+}
+
+
+##### Data Network #####################
+data "aws_subnet_ids" "data_tier" {
+  vpc_id = "${data.aws_vpc.main.id}"
+}
+
+data "aws_subnet" "data_subnet_1" {
+   filter {
+    name = "tag:Name"
+    values = ["sub_data_${var.project}_1"]
+  }
+}
+
+############################
+
+data "aws_db_instance" "db" {
+  db_instance_identifier = "symbiosis"
 }

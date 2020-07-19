@@ -1,34 +1,12 @@
 # Security Groups
 #****************
 
-resource "aws_security_group" "public_sg" {
-  name        = "${var.project}_public_sg"
+resource "aws_security_group" "vpc_sg" {
+  name        = "${var.project}_vpc_sg"
   description = "Allow inbound traffic"
   vpc_id      = "${aws_vpc.main.id}"
   tags = {
-    Name                     = "${var.project}_public_sg"
-    Type                     = "EC2 Security Group"
-    Monitoring               = "true"
-  }
-}
-
-resource "aws_security_group" "private_sg" {
-  name        = "${var.project}_private_sg"
-  description = "Allow inbound traffic"
-  vpc_id      = "${aws_vpc.main.id}"
-  tags = {
-    Name                     = "${var.project}_private_sg"
-    Type                     = "EC2 Security Group"
-    Monitoring               = "true"
-  }
-}
-
-resource "aws_security_group" "data_sg" {
-  name        = "${var.project}_data_sg"
-  description = "Allow inbound traffic"
-  vpc_id      = "${aws_vpc.main.id}"
-  tags = {
-    Name                     = "${var.project}_data_sg"
+    Name                     = "${var.project}_vpc_sg"
     Type                     = "EC2 Security Group"
     Monitoring               = "true"
   }
@@ -40,12 +18,6 @@ resource "aws_security_group" "data_sg" {
 
 #********** Outputs ************
 
-output "public_security" {
-  value       = aws_security_group.public_sg.id
-}
-output "private_security" {
-  value       = aws_security_group.private_sg.id
-}
-output "data_security" {
-  value       = aws_security_group.data_sg.id
+output "vpc_security" {
+  value       = aws_security_group.vpc_sg.id
 }

@@ -6,8 +6,8 @@ resource "aws_network_acl" "main_nacl" {
     rule_no    = 100
     action     = "allow"
     cidr_block = "${var.default_route}"
-    from_port  = 8080
-    to_port    = 8080
+    from_port  = 0
+    to_port    = 0
   }
 
   egress {
@@ -15,8 +15,8 @@ resource "aws_network_acl" "main_nacl" {
     rule_no    = 100
     action     = "allow"
     cidr_block = "${var.default_route}"
-    from_port  = 8080
-    to_port    = 8080
+    from_port  = 0
+    to_port    = 0
   }
   tags = {
     Name = "${var.project}-nacl-rules"

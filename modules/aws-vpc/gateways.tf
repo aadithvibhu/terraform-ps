@@ -18,7 +18,7 @@ resource "aws_eip" "eip_main"{
 
 resource "aws_nat_gateway" "ngw_main" {
   allocation_id = "${aws_eip.eip_main.id}"
-  subnet_id = "${aws_subnet.public_subnet.id}"
+  subnet_id = "${aws_subnet.public_subnet_1.id}"
   depends_on = [aws_internet_gateway.igw_main]
    
   tags = {
@@ -60,7 +60,7 @@ resource "aws_route_table" "private-route" {
 #********
 
 resource "aws_route_table_association" "private-route-assoc" {
-    subnet_id = "${aws_subnet.private_subnet.id}"
+    subnet_id = "${aws_subnet.private_subnet_1.id}"
     route_table_id = "${aws_route_table.private-route.id}"
 }
 
@@ -68,7 +68,7 @@ resource "aws_route_table_association" "private-route-assoc" {
 #********
 
 resource "aws_route_table_association" "public-route-assoc" {
-    subnet_id = "${aws_subnet.public_subnet.id}"
+    subnet_id = "${aws_subnet.public_subnet_1.id}"
     route_table_id = "${aws_route_table.public-route.id}"
 }
 
